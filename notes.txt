@@ -1,0 +1,17 @@
+Prompt:
+	denis@ubuntu:~$ == denis@ubuntu:/home/denis
+	[username]@[name_of_system]:[current working directory of the shell]
+	~: home directory /home/denis
+	$: end of the prompt
+Process command:
+	program-name arguments
+	ls -la Makefile: -> program-name: ls, arguments: -la Makefile
+	ls -> (in dir of PATH - type env in shell)
+	/bin/ls -> (in root dir), example /bin/ls or /snap/bin/code
+	bin/foo -> relative pathname (in the PWD)
+	./a.out -> (a.out in the PWD)
+
+HOW SHELL EXECUTES PROGRAM?
+	1. shell forks itself
+	2. parent waits for child
+	3. child exec's the command, passing the arguments
