@@ -67,6 +67,18 @@ pipelineA && pipelineB
 pipelineA || pipelineB
 	- if last command of A returns non-0, then run B
 
+BUILT-IN COMMANDS
+	- executed in the shell process
+	- may be redirected/piped like a process command
+	examples: help, cd, echo (print arguments to stdout),
+		if, while 
+
+CONTROL FLOW CONSTRUCTS
+	if command-list then command-list fi
+	while command-list do command-list done
+
+In shell true is 0, anything other is considered false.
+
 
 Theory:
 [1] https://www.youtube.com/playlist?list=PLFAC320731F539902&si=eJbj1f1oOu2oiChZ
