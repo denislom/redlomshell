@@ -15,3 +15,58 @@ HOW SHELL EXECUTES PROGRAM?
 	1. shell forks itself
 	2. parent waits for child
 	3. child exec's the command, passing the arguments
+
+CHARACTERS WITH SPECIAL MEANING:
+# ' " \ $ ` * ~ < > ( ) ! | & ; space newline
+
+FILE DESCRIPTORS
+stdin -> fd 0 (read)
+stdout -> fd 1 (write)
+
+REDIRECTION (redirect stdin and/or stdout)
+	1. program forks itself
+	2. child closes stdin and/or stdout
+	3. child opens file(s)
+	4. child exec's new program
+
+	< file_path (close fd 0 and open file for reading)
+	> file_path (close fd 1 and open file for writing)
+
+	foo bar 35 <notes.txt >/dev/null
+	1. shell forks itself
+	2. parent waits for child
+	3. child closes stdin, opens notes.txt for reading
+	4. child closes stdin, opens /dev/null for writing
+	5. child exec's the command, passing the arguments
+
+	PIPELINING
+	commandA | commandB
+	- shell runs those commads parallel, it will redirect stdout of commandA
+		as stdin for commandA
+
+	ls -la bin | less
+	1. shell creates pipe
+	2. shell forks itself twice
+	3. parent waits for both children
+	4. one child redirects stdout to the pipe before it execs the first command
+	5. other child redirects stdin to the pipe before it execs the second command
+
+	pipeline: one command or multiple commands separated by |
+	command-list: on or more pipelines seperated and terminated by ; & or newline
+
+	ls -la ; cat notes.txt			!=			ls -la | cat notes.txt
+		(with ;) shell executes first pipeline and waits to finish then executes the second pipeline.
+
+RETURN VALUES
+	every command return exit status
+		0 = OK
+		non-0 = error
+
+pipelineA && pipelineB
+	- if last command of A returns 0, then run B
+pipelineA || pipelineB
+	- if last command of A returns non-0, then run B
+
+
+Theory:
+[1] https://www.youtube.com/playlist?list=PLFAC320731F539902&si=eJbj1f1oOu2oiChZ
