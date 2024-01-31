@@ -71,14 +71,50 @@ BUILT-IN COMMANDS
 	- executed in the shell process
 	- may be redirected/piped like a process command
 	examples: help, cd, echo (print arguments to stdout),
-		if, while 
+		if, while, function, 
 
 CONTROL FLOW CONSTRUCTS
 	if command-list then command-list fi
 	while command-list do command-list done
 
+function foo {
+	ls -la
+	cd /
+}
+
+What happens with name collision between function names, built-in command names and process command names.
+	1. function call
+	2. built-in command
+	3. process command (directories of PATH)
+
 In shell true is 0, anything other is considered false.
 
+function foo2 { cd $2; ls $1; }
+foo2 /bin Desktop
+echo $? (displays return value of last command)
+
+BRACE EXPANSION
+	preamble{comma-seperated-list}postscript
+
+	foo{apple,banana}bar
+	echo foo{apple,banana}bar
+		-> fooapplebar foobananabar
+
+echo ~
+
+COMMAND SUBSTITUTION
+	$(command) -> $(echo foo)
+	`command` -> `echo foo`
+
+ARITHMETIC SUBSTITUTION
+	$((3 + 5))
+	echo $((3 + 5))
+
+FILENAME EXPANSION
+	* (match any characters)
+	? (match any single charachter)
+		foo*bar: matches foo3bar, fooASDFASbar, foobar
+		foo?bar: matches foo3bar
 
 Theory:
 [1] https://www.youtube.com/playlist?list=PLFAC320731F539902&si=eJbj1f1oOu2oiChZ
