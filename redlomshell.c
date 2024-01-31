@@ -6,13 +6,14 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/01/30 22:27:35 by dlom             ###   ########.fr       */
+/*   Updated: 2024/02/01 00:56:43 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redlomshell.h"
 
-int main() {
+int main(int argc, char **argv, char **env)
+{
 	char *input;
 	char prompt[] = "minishell> ";
 
