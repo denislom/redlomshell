@@ -116,5 +116,35 @@ FILENAME EXPANSION
 		foo*bar: matches foo3bar, fooASDFASbar, foobar
 		foo?bar: matches foo3bar
 
+TERMINATE COMMAND WITH &
+	ls -la &
+	-> pipeline runs "in background"
+	1. shell doesn't wait for the pipeline
+	2. pipeline runs in a subshell
+	3. the pipeline may not read the terminal
+	4. the pipelon may (or may not) write to the terminal
+
+(JOB CONTROL)
+Session
+	-> job: process, process
+	-> job: process, process, process, process
+	-> job: process, process, process, process, process, process
+
+Commands:
+jobs (list background jobs and their job numbers)
+bg jobNumber (move job to the background)
+fg jobNumber (move job to te foreground)
+
+SHELL SCRIPTS (.sh)
+	source file (executers commands from file in the current shell)
+	source ~/.bashrc
+
+	shebang
+		#!/bin/bash
+		#!/bin/python
+		#!/bin/perl
+	then we can run the file as executable... ./foo.sh
+	chmo u+x foo.sh
+
 Theory:
 [1] https://www.youtube.com/playlist?list=PLFAC320731F539902&si=eJbj1f1oOu2oiChZ
