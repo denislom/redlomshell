@@ -60,8 +60,16 @@ REDIRECTION (redirect stdin and/or stdout)
 RETURN VALUES
 	every command return exit status
 		0 = OK
-		non-0 = error
+		non-0 = errors, process, process
+	-> job: process, process, process, process, process, process
 
+Commands:
+jobs (list background jobs and their job numbers)
+bg jobNumber (move job to the background)
+fg jobNumber (move job to te foreground)
+
+SHELL SCRIPTS (.sh)
+	source file (executers commands fr
 pipelineA && pipelineB
 	- if last command of A returns 0, then run B
 pipelineA || pipelineB
@@ -72,8 +80,16 @@ BUILT-IN COMMANDS
 	- may be redirected/piped like a process command
 	examples: help, cd, echo (print arguments to stdout),
 		if, while, function, 
+s, process, process
+	-> job: process, process, process, process, process, process
 
-CONTROL FLOW CONSTRUCTS
+Commands:
+jobs (list background jobs and their job numbers)
+bg jobNumber (move job to the background)
+fg jobNumber (move job to te foreground)
+
+SHELL SCRIPTS (.sh)
+	source file (executers commands fr
 	if command-list then command-list fi
 	while command-list do command-list done
 
@@ -90,9 +106,16 @@ What happens with name collision between function names, built-in command names 
 In shell true is 0, anything other is considered false.
 
 function foo2 { cd $2; ls $1; }
-foo2 /bin Desktop
-echo $? (displays return value of last command)
+foo2 /bin Desktops, process, process
+	-> job: process, process, process, process, process, process
 
+Commands:
+jobs (list background jobs and their job numbers)
+bg jobNumber (move job to the background)
+fg jobNumber (move job to te foreground)
+
+SHELL SCRIPTS (.sh)
+	source file (executers commands fr
 BRACE EXPANSION
 	preamble{comma-seperated-list}postscript
 
@@ -116,8 +139,16 @@ FILENAME EXPANSION
 		foo*bar: matches foo3bar, fooASDFASbar, foobar
 		foo?bar: matches foo3bar
 
-TERMINATE COMMAND WITH &
-	ls -la &
+TERMINATE COMMAND WITH &s, process, process
+	-> job: process, process, process, process, process, process
+
+Commands:
+jobs (list background jobs and their job numbers)
+bg jobNumber (move job to the background)
+fg jobNumber (move job to te foreground)
+
+SHELL SCRIPTS (.sh)
+	source file (executers commands fr
 	-> pipeline runs "in background"
 	1. shell doesn't wait for the pipeline
 	2. pipeline runs in a subshell
@@ -137,19 +168,34 @@ fg jobNumber (move job to te foreground)
 
 SHELL SCRIPTS (.sh)
 	source file (executers commands from file in the current shell)
-	source ~/.bashrc
+	source ~/.bashrchttps://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 
-	shebang
-		#!/bin/bash
-		#!/bin/python
-		#!/bin/perl
-	then we can run the file as executable... ./foo.sh
-	chmo u+x foo.sh
+PARTS OF SHELL PROGRAM:
+0. Lexer
+1. Parser: reads the command line and puts it into a data structure "Command Table"
+2. Executor: takes Command Table and creates a process for every SimpleCommand in the array,
+	if necessary it also creates the pipes.
+3. Shell Subsystems
+
+THE LEXER
+
+THE PARSER
+
+EXECUTOR
+A | B | C | > outfile < infile 2> errfile
+	redirection "< infile": the input of the first SimpleCommandA is redirected from infile
+	output redirection "> outfile": redirects the output of the last SimpleCommandB to outfile
+	redirection to errfile ">& errfile": the stderr of all SimpleCommand processes will be redirected to errfile
+
+
 
 Theory:
-[0] https://suspectedoceano.notion.site/Cursus-97a5ef0ea22b47779a24de1299e53e9b
-[1] https://www.youtube.com/playlist?list=PLFAC320731F539902&si=eJbj1f1oOu2oiChZ
-[2] https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html
-[3]
-[4]
-[5]
+[0]	https://suspectedoceano.notion.site/Cursus-97a5ef0ea22b47779a24de1299e53e9b
+[1]	https://www.youtube.com/playlist?list=PLFAC320731F539902&si=eJbj1f1oOu2oiChZ
+[2]	IMPLEMENTING A SHELL
+	https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html
+[3] https://harm-smits.github.io/42docs/projects/minishell
+[4]	WRITING YOUR OWN SHELL
+	https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
+[5]	SHELL SYNTAX
+	https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
