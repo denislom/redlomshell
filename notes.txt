@@ -177,7 +177,9 @@ PARTS OF SHELL PROGRAM:
 	if necessary it also creates the pipes.
 3. Shell Subsystems
 
-THE LEXER
+THE LEXER Lex and Yacc
+	UNIX tools to implement parser. Used to implement compilers, interpreters and preprocessors.
+	Lexer = Lexical Analyzer
 
 THE PARSER
 
@@ -187,6 +189,13 @@ A | B | C | > outfile < infile 2> errfile
 	output redirection "> outfile": redirects the output of the last SimpleCommandB to outfile
 	redirection to errfile ">& errfile": the stderr of all SimpleCommand processes will be redirected to errfile
 
+SHELL SUBSYSTEMS
+	for example;
+	- Enviroment Variables: Expressions of the form ${VAR} are expanded with the corresponding environment variable.
+		Shell should be able to set, expand and print environment variables.
+	- Wildcards: Arguments of the form a*a are expanded to all the files that match the in the local directory
+		and in multiple directories.
+	- Subshells: arguments between `` are executed and the output is sent as input to the shell.
 
 
 Theory:
