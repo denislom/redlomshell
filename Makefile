@@ -6,23 +6,23 @@
 #    By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 00:21:51 by dlom              #+#    #+#              #
-#    Updated: 2024/01/29 00:23:12 by dlom             ###   ########.fr        #
+#    Updated: 2024/02/04 00:30:43 by dlom             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =	minishell
+NAME =	redlomshell
 SRCS =	redlomshell.c \
 
 
 OBJS = $(SRCS:.c=.o)
 
-CC = cc -pthread
-CFLAGS = -Wall -Wextra -Werror -g
+CC = gcc
+CFLAGS = -g -pthread -lreadline
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) $(CFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS)  -c $< -o $@	
