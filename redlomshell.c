@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/01 00:56:43 by dlom             ###   ########.fr       */
+/*   Updated: 2024/02/04 00:58:23 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(int argc, char **argv, char **env)
 {
 	char *input;
-	char prompt[] = "minishell> ";
+	char prompt[] = "minishell$ ";
 
 // Main loop
 	while (1) {
@@ -29,12 +29,12 @@ int main(int argc, char **argv, char **env)
 			}
 
 		// Add input to history
-		if (strlen(input) > 0) {
+		if (ft_strlen(input) > 0) {
 			add_history(input);
 		}
 
         // Echo the input back to the user
-		printf("You entered: %s\n", input);
+		ft_printf("You entered: %s\n", input);
 
 		// Free the allocated memory
 		free(input);

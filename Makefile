@@ -6,7 +6,7 @@
 #    By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 00:21:51 by dlom              #+#    #+#              #
-#    Updated: 2024/02/04 00:30:43 by dlom             ###   ########.fr        #
+#    Updated: 2024/02/04 00:57:21 by dlom             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,13 @@ OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -g -pthread -lreadline
 
-all: $(NAME)
+all: lib $(NAME)
+
+lib:
+	make -C libft
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(CFLAGS)
+	$(CC) -o $(NAME) $(OBJS) $(CFLAGS) libft/libft.a
 
 %.o: %.c
 	$(CC) $(CFLAGS)  -c $< -o $@	
