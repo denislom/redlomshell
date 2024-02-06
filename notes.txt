@@ -182,6 +182,24 @@ THE LEXER Lex and Yacc
 	Lexer = Lexical Analyzer
 
 THE PARSER
+	Steps:
+	1. Tokenization: The parser's first job is to break down the command line into tokens.
+			Tokens are the basic elements like commands, arguments,
+			redirection operators (<, >, >>, <<), and pipe symbols (|).
+			Allowed Functions to Use:
+				readline() for reading input from the user.
+				malloc, free for dynamic memory allocation needed during tokenization.
+			Standard C library functions for string manipulation (strdup, strcmp, etc.) to handle and store tokens.
+	2. Lexical Analysis:
+		After tokenization, perform lexical analysis to classify tokens
+		according to their roles (commands, operators, arguments).
+	3. Syntax Analysis: Construct a syntax tree or a command table from the tokens. This involves understanding the
+		grammar of the shell commands to correctly interpret the sequence of commands, pipes, and redirections.
+			Basic Structure:
+				Commands and arguments are organized into simple commands.
+				Pipes and redirections affect how simple commands are linked together.
+				Error handling for syntax errors.
+	4. Use Lex and Yacc (optional)
 
 EXECUTOR
 A | B | C | > outfile < infile 2> errfile
@@ -208,7 +226,9 @@ Theory:
 	https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
 [5]	SHELL SYNTAX
 	https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
-[6] Camilo's recomendation:
+[6] Lex and Yacc Tutorial
+	https://www.ibm.com/docs/en/zos/2.3.0?topic=tools-tutorial-using-lex-yacc
+[7] Camilo's recomendation:
 	https://github.com/jotavare/42-resources
 
 [99] Programming a basic shell in C
