@@ -208,10 +208,13 @@ Theory:
 	https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
 [5]	SHELL SYNTAX
 	https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
-[6] Programming a basic shell in C
+[6] Camilo's recomendation:
+	https://github.com/jotavare/42-resources
+
+[99] Programming a basic shell in C
 	https://www.youtube.com/watch?v=spD11nnLsLE
 	https://github.com/bitwitch/csapp/tree/master/ch8/shell
-[7] Youtubes to check (not worth it so much)
+[100] Youtubes to check (not worth it so much)
 	https://www.youtube.com/watch?v=cIBmeEpsMj0&list=PLxIRFba3rzLzxxZMMbrm_-mkI7mV9G0pj
 	https://www.youtube.com/watch?v=z4LEuxMGGs8
 	https://www.youtube.com/watch?v=zDjLADJGXFs&pp=ygUUYyBjb2RpbmcgYmFzaWMgc2hlbGw%3D
