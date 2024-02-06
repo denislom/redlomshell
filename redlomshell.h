@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:18:00 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/06 22:32:31 by dlom             ###   ########.fr       */
+/*   Updated: 2024/02/06 23:14:27 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 #include <readline/history.h>
 #include <signal.h>
 # include "./libft/libft.h"
+
+typedef enum e_return
+{
+	RETURN_ERR = -1,
+	RETURN_SUCCESSFUL = 0,
+	RETURN_FALSE = 1,
+	RETURN_TRUE = 2,
+	RETURN_EXIT = 3,
+	RETURN_PIPE = 4
+}			t_return;
 
 typedef struct s_simple_command
 {
