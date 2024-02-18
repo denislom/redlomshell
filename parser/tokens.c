@@ -6,45 +6,56 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 22:36:34 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/18 22:37:21 by dlom             ###   ########.fr       */
+/*   Updated: 2024/02/18 23:08:11 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *whitespace = " \t\r\n";
-char *symbols = "|();&<>";
-
-int gettoken(char **ps, char *es, char **q, char **eq)
+int	gettoken(char **ps, char *es, char **q, char **eq)
 {
-	char *s;
-	int ret;
+	char	*s; // Pointer to navigate through the string
+	int		ret; // Variable to hold the token type or character
 
-	s = *ps;
-	while (s < es && strchr(whitespace, *s))
+	s = *ps; // Start at the current position in the string
+	// Skip initial whitespace characters
+	while (s < es && (*s == ' ' || *s == '\t' || *s == '\n'))
 		s++;
-	if (q)
-		*q = s;
-	ret = *s;
-
-	if (*s == 0) {
-	} else if (*s == '|' || *s == '(' || *s == ')' || *s == ';' || *s == '&' || *s == '<') {
-		s++;
-	} else if (*s == '>') {
-		s++;
-		if (*s == '>') {
-			ret = '+';
-			s++;
+	if (q) // If a start pointer for the token is provided
+		*q = s; // Set it to the current position
+	ret = *s; // Set the return value to the current character (token type)
+	// Check for end of string
+	if (*s == 0)
+	{
+		// Do nothing if at end of string
+	}
+	// Check for one-character tokens (operators and special symbols)
+	else if
+	(*s == '|' || *s == '(' || *s == ')' || *s == ';' || *s == '&' || *s == '<')
+		s++; // Simply move past this character
+	// Check for redirection token ('>')
+	else if (*s == '>')
+	{
+		s++; // Move past '>'
+		if (*s == '>') // If the next character is also '>', it's an append redirection
+		{
+			ret = '+'; // Use '+' to denote append redirection ('>>')
+			s++; // Move past the second '>'
 		}
-	} else {
-		ret = 'a';
-		while (s < es && !strchr(whitespace, *s) && !strchr(symbols, *s))
+	}
+	// Handle argument tokens (not operators or whitespace)
+	else
+	{
+		ret = 'a'; // Use 'a' to denote an argument token
+		// Move past the characters of the token until hitting whitespace or a special symbol
+		while (s < es && !(*s == ' ' || *s == '\t' || *s == '\n') 
+			&& !(*s == '|' || *s == '(' || *s == ')' || *s == ';'
+				|| *s == '&' || *s == '<' || *s == '>'))
 			s++;
 	}
-
-	if (eq)
-		*eq = s;
-
-	while (s < es && strchr(whitespace, *s))
+	if (eq) // If an end pointer for the token is provided
+		*eq = s; // Set it to the current position
+	// Skip any trailing whitespace after the token
+	while (s < es && (*s == ' ' || *s == '\t' || *s == '\n'))
 		s++;
-	*ps = s;
-	return ret;
+	*ps = s; // Update the start position to the new position for next call
+	return (ret); // Return the token type or character
 }
