@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/06 22:45:29 by dlom             ###   ########.fr       */
+/*   Updated: 2024/02/11 20:48:15 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int main(void)
 
 	while (1)
 	{
-		// Display prompt and wait for input
+		// readline gets a line from a user and returns it. The line is allocated withh malloc.
+		// the final newline "/n" is removed.
 		input = readline("minishell$ ");
 		if (!input)
 			break; // Exit if Ctrl-D is pressed
