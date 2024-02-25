@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 22:36:34 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/18 23:08:11 by dlom             ###   ########.fr       */
+/*   Updated: 2024/02/25 22:40:29 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
 
 	s = *ps; // Start at the current position in the string
 	// Skip initial whitespace characters
-	while (s < es && (*s == ' ' || *s == '\t' || *s == '\n'))
+	while (s < es && (*s == ' ' || *s == '\t' || *s == '\r' || *s == '\n' || *s == '\v'))
 		s++;
 	if (q) // If a start pointer for the token is provided
 		*q = s; // Set it to the current position
@@ -46,7 +46,7 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
 	{
 		ret = 'a'; // Use 'a' to denote an argument token
 		// Move past the characters of the token until hitting whitespace or a special symbol
-		while (s < es && !(*s == ' ' || *s == '\t' || *s == '\n') 
+		while (s < es && !(*s == ' ' || *s == '\t' || *s == '\r' || *s == '\n' || *s == '\v') 
 			&& !(*s == '|' || *s == '(' || *s == ')' || *s == ';'
 				|| *s == '&' || *s == '<' || *s == '>'))
 			s++;
@@ -54,7 +54,7 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
 	if (eq) // If an end pointer for the token is provided
 		*eq = s; // Set it to the current position
 	// Skip any trailing whitespace after the token
-	while (s < es && (*s == ' ' || *s == '\t' || *s == '\n'))
+	while (s < es && (*s == ' ' || *s == '\t' || *s == '\r' || *s == '\n' || *s == '\v'))
 		s++;
 	*ps = s; // Update the start position to the new position for next call
 	return (ret); // Return the token type or character
