@@ -6,9 +6,11 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 22:36:34 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/25 22:40:29 by dlom             ###   ########.fr       */
+/*   Updated: 2024/02/25 23:08:36 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../redlomshell.h"
 
 int	gettoken(char **ps, char *es, char **q, char **eq)
 {
@@ -58,4 +60,20 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
 		s++;
 	*ps = s; // Update the start position to the new position for next call
 	return (ret); // Return the token type or character
+}
+
+/* 
+Function peek non zero value (truthy value) if the next non white-space character
+is one of the chars from toks.
+*/
+
+int	peek(char **ps, char *es, char *toks)
+{
+	char	*s;
+
+	s = *ps;
+	while (s < es && (*s == ' ' || *s == '\t' || *s == '\r' || *s == '\n' || *s == '\v'))
+		s++;
+	*ps = s;
+	return (*s && ft_strchr(toks, *s));
 }
