@@ -228,9 +228,22 @@ Theory:
 	https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 [6] Lex and Yacc Tutorial
 	https://www.ibm.com/docs/en/zos/2.3.0?topic=tools-tutorial-using-lex-yacc
+	https://www.youtube.com/watch?v=54bo1qaHAfk
 [7] Camilo's recomendation:
 	https://github.com/jotavare/42-resources
-
+[8] Tutorial - Write a Shell in C 
+	https://brennan.io/2015/01/16/write-a-shell-in-c/
+[9] Writing a Unix Shell
+	https://indradhanush.github.io/blog/writing-a-unix-shell-part-1/
+	https://indradhanush.github.io/blog/writing-a-unix-shell-part-2/
+	https://indradhanush.github.io/blog/writing-a-unix-shell-part-3/
+[10] http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/
+[11] Some Medium article
+	https://achrafbelarif.medium.com/42cursus-minishell-29cd25f972e6
+[12]
+	https://www.youtube.com/watch?v=ubt-UjcQUYg&list=PLbtzT1TYeoMhF4hcpEiCsOeN13zqrzBJq&index=1&pp=iAQB
+	https://www.youtube.com/watch?v=ZjzMdsTWF0U&list=PLbtzT1TYeoMhF4hcpEiCsOeN13zqrzBJq&index=2
+	https://github.com/mit-pdos/xv6-public/
 [99] Programming a basic shell in C
 	https://www.youtube.com/watch?v=spD11nnLsLE
 	https://github.com/bitwitch/csapp/tree/master/ch8/shell
