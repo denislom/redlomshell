@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:18:00 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/06 23:16:32 by dlom             ###   ########.fr       */
+/*   Updated: 2024/02/27 00:06:28 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ typedef struct s_command
 	int background; // Boolean indicating if the command should run in the background
 } t_command;
 
+//parser-tokens.c
+int	gettoken(char **ps, char *es, char **q, char **eq);
+int	peek(char **ps, char *es, char *toks);
+
+//parser-parse_input.c
+struct cmd*	parse_command(char *s);
 
 #define MAX_INPUT_SIZE 1024
 

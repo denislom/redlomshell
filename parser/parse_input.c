@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_input.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 00:45:28 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/07 01:03:12 by dlom             ###   ########.fr       */
-/*                                                                            */
+/*																																						*/
+/*																												:::			::::::::	 */
+/*	 parse_input.c																			:+:			:+:		:+:	 */
+/*																										+:+ +:+				 +:+		 */
+/*	 By: dlom <dlom@student.42prague.com>					 +#+	+:+			 +#+				*/
+/*																								+#+#+#+#+#+	 +#+					 */
+/*	 Created: 2024/02/07 00:45:28 by dlom							#+#		#+#						 */
+/*	 Updated: 2024/02/27 00:02:40 by dlom						 ###	 ########.fr			 */
+/*																																						*/
 /* ************************************************************************** */
 
 #include "../redlomshell.h"
@@ -34,21 +34,37 @@
 
 void parse_input(char *input, t_command *command)
 {
-    // Tokenization process
-    // Example: split input into tokens using spaces and special characters as delimiters
+		// Tokenization process
+		// Example: split input into tokens using spaces and special characters as delimiters
 
-    // Syntax analysis
-    // Example: for each token, determine its type and fill the `t_command` structure
+		// Syntax analysis
+		// Example: for each token, determine its type and fill the `t_command` structure
 
-    // Note: Implement specific functions to handle redirections, pipes, and command execution logic
+		// Note: Implement specific functions to handle redirections, pipes, and command execution logic
 }
 
 char **tokenize(char *input) {
-    // Split the input into tokens based on spaces and special characters
-    // You might use strtok, strsep, or write your own splitter function
+		// Split the input into tokens based on spaces and special characters
+		// You might use strtok, strsep, or write your own splitter function
 }
 
 t_command *parse_tokens(char **tokens) {
-    // Create a command structure from tokens
-    // Identify pipes and redirections and organize commands and arguments accordingly
+		// Create a command structure from tokens
+		// Identify pipes and redirections and organize commands and arguments accordingly
+}
+
+struct cmd*	parse_command(char *s)
+{
+	char *es;
+	struct cmd	*cmd;
+
+	es = s + ft_strlen(s);
+	cmd = parseline(&s, es);
+	peek(&s, es, "");
+	if(s != es){
+		write(STDERR_FILENO, "s != es\n", 8);
+		exit(2);
+	}
+	// nul_terminate(cmd); //TODO
+	return cmd;
 }
