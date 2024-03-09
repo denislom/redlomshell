@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/02/27 01:00:06 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/09 22:37:37 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void setup_signals(void)
 
 int main(void)
 {
-	char *input;
-	t_command command; // Assume this is your command structure
+	char	*input;
+	int		fd;
 
 	setup_signals();
 

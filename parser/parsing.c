@@ -1,24 +1,25 @@
 /* ************************************************************************** */
-/*																																						*/
-/*																												:::			::::::::	 */
-/*	 parse_input.c																			:+:			:+:		:+:	 */
-/*																										+:+ +:+				 +:+		 */
-/*	 By: dlom <dlom@student.42prague.com>					 +#+	+:+			 +#+				*/
-/*																								+#+#+#+#+#+	 +#+					 */
-/*	 Created: 2024/02/07 00:45:28 by dlom							#+#		#+#						 */
-/*	 Updated: 2024/02/27 00:02:40 by dlom						 ###	 ########.fr			 */
-/*																																						*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/09 19:42:53 by dlom              #+#    #+#             */
+/*   Updated: 2024/03/09 22:37:25 by dlom             ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../redlomshell.h"
 
-struct cmd*	parse_command(char *s)
+struct cmd	*parse_cmd(char *s)
 {
 	char *es;
 	struct cmd	*cmd;
 
 	es = s + ft_strlen(s);
-	cmd = parseline(&s, es);
+	cmd = parse_line(&s, es);
 	peek(&s, es, "");
 	if(s != es){
 		write(STDERR_FILENO, "s != es\n", 8);
@@ -28,7 +29,7 @@ struct cmd*	parse_command(char *s)
 	return cmd;
 }
 
-int	gettoken(char **ps, char *es, char **q, char **eq)
+int	get_token(char **ps, char *es, char **q, char **eq)
 {
 	char	*s; // Pointer to navigate through the string
 	int		ret; // Variable to hold the token type or character

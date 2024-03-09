@@ -244,6 +244,8 @@ Theory:
 	https://www.youtube.com/watch?v=ubt-UjcQUYg&list=PLbtzT1TYeoMhF4hcpEiCsOeN13zqrzBJq&index=1&pp=iAQB
 	https://www.youtube.com/watch?v=ZjzMdsTWF0U&list=PLbtzT1TYeoMhF4hcpEiCsOeN13zqrzBJq&index=2
 	https://github.com/mit-pdos/xv6-public/
+	https://pdos.csail.mit.edu/6.828/2019/labs/sh.html
+	https://github.com/mit-pdos/xv6-public
 [99] Programming a basic shell in C
 	https://www.youtube.com/watch?v=spD11nnLsLE
 	https://github.com/bitwitch/csapp/tree/master/ch8/shell

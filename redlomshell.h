@@ -24,7 +24,7 @@
 # include "./libft/libft.h"
 
 #define EXEC	1
-#define REDIR 2
+#define REDIR	2
 #define PIPE	3
 #define LIST	4
 #define BACK	5
@@ -94,12 +94,17 @@ typedef struct s_command
 
 /*** PARSER ***/
 
-//parser-tokens.c
-int	gettoken(char **ps, char *es, char **q, char **eq);
-int	peek(char **ps, char *es, char *toks);
+//parsing.c
+struct cmd	*parse_cmd(char *s);
+int			get_token(char **ps, char *es, char **q, char **eq);
+int			peek(char **ps, char *es, char *toks);
 
-//parser-parse_input.c
-struct cmd*	parse_command(char *s);
+// construct.c
+struct cmd	*exec_cmd(void);
+struct cmd	*redir_cmd(struct cmd *subcmd, char *file, char *efile, int mode, int fd);
+struct cmd	*pipe_cmd(struct cmd *left, struct cmd *right);
+struct cmd	*list_cmd(struct cmd *left, struct cmd *right);
+struct cmd	*back_cmd(struct cmd *subcmd);
 
 /*** EXECUTOR ***/
 
