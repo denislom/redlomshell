@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:42:53 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/09 22:37:25 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/09 22:52:04 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ struct cmd	*parse_cmd(char *s)
 		write(STDERR_FILENO, "s != es\n", 8);
 		exit(2);
 	}
-	// nul_terminate(cmd); //TODO
+	nul_terminate(cmd);
 	return cmd;
 }
 

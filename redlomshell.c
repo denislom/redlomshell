@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/09 22:37:37 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/09 23:13:48 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,40 @@ void setup_signals(void)
 	// Ignore SIGQUIT signal with Ctrl-\ signal(SIGQUIT, SIG_IGN);
 }
 
+int	get_cmd(char **input)
+{
+	*input = readline("$ ");
+
+	if (!*input)
+		return -1;
+	if (**input)
+		add_history(*input);
+	return (0);
+}
+
 int main(void)
 {
 	char	*input;
-	int		fd;
 
+	input = NULL;
 	setup_signals();
 
-	while (1)
+	while(get_cmd(&input) >= 0)
 	{
-		// readline gets a line from a user and returns it. The line is allocated withh malloc.
-		// the final newline "/n" is removed.
-		input = readline("minishell$ ");
-		if (!input)
-			break; // Exit if Ctrl-D is pressed
-
-		if (*input)
-			add_history(input); // Only add non-empty commands to history
-
-		// // Parse the input to fill your command structure
-		// parse_input(input, &command);
-
-		// // Execute the command
-		// execute_command(&command);
-
-		// // Cleanup
-		// free(input);
-		// clear_command_structure(&command); // Assume this function clears your command structure
+		if (strncmp(input, "cd ", 3) == 0) {
+			// Chdir must be called by the parent, not the child
+			if (chdir(input + 3) < 0)
+				fprintf(stderr, "cannot cd %s\n", input + 3); // Use fprintf for stderr
+			continue;
+		}
+		if (fork1() == 0) { // Assuming fork1 is your version of fork that handles errors
+			run_cmd(parse_cmd(input));
+			exit(0); // Ensure the child exits after running the command
+		}
+		wait(NULL); // Use wait with NULL to wait for any child process
 	}
 
-    // Perform any final cleanup if necessary
-    return 0;
+	// Free the dynamically allocated inputfer at the end
+	free(input);
+	return 0;
 }
