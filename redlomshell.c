@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/10 22:29:24 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/10 22:53:28 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,8 @@ int main(void)
 			// Chdir must be called by the parent, not the child
 			if (chdir(input + 3) == -1)
 			{
-				printf("bash: cd: %s: No such file or directory\n", (input+3));
+				printf("bash: cd: %s: No such file or directory\n", (input + 3));
 			}
-			// if (chdir(input + 3) < 0)
-			// {
-			// 	printf(2, "cannot cd %s\n", input+3);
-			// }
 			continue;
 		}
 		// if (fork1() == 0) { // Assuming fork1 is your version of fork that handles errors
