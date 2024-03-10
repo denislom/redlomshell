@@ -109,6 +109,8 @@ struct cmd	*back_cmd(struct cmd *subcmd);
 /*** EXECUTOR ***/
 
 /*** OTHER FUNCTIONS ***/
+// error_handling.c
+void	print_error(const char *error);
 
 #define MAX_INPUT_SIZE 1024
 

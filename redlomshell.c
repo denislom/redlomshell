@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/09 23:13:48 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/10 11:32:54 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,24 @@ int main(void)
 
 	while(get_cmd(&input) >= 0)
 	{
-		if (strncmp(input, "cd ", 3) == 0) {
+		if (ft_strncmp(input, "cd ", 3) == 0)
+		{
 			// Chdir must be called by the parent, not the child
-			if (chdir(input + 3) < 0)
-				fprintf(stderr, "cannot cd %s\n", input + 3); // Use fprintf for stderr
+			if (chdir(input + 3) == -1)
+			{
+				printf("cd should be performed");
+			}
+			// if (chdir(input + 3) < 0)
+			// {
+			// 	printf(2, "cannot cd %s\n", input+3);
+			// }
 			continue;
 		}
-		if (fork1() == 0) { // Assuming fork1 is your version of fork that handles errors
-			run_cmd(parse_cmd(input));
-			exit(0); // Ensure the child exits after running the command
-		}
-		wait(NULL); // Use wait with NULL to wait for any child process
+		// if (fork1() == 0) { // Assuming fork1 is your version of fork that handles errors
+		// 	run_cmd(parse_cmd(input));
+		// 	exit(0); // Ensure the child exits after running the command
+		// }
+		// wait(NULL); // Use wait with NULL to wait for any child process
 	}
 
 	// Free the dynamically allocated inputfer at the end
