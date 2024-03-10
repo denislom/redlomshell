@@ -6,11 +6,12 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/10 11:32:54 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/10 21:28:16 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redlomshell.h"
+#include <linux/limits.h>
 
 void handle_sigint(int sig)
 {
@@ -28,8 +29,21 @@ void setup_signals(void)
 
 int	get_cmd(char **input)
 {
-	*input = readline("$ ");
+	char	cwd[PATH_MAX];
+	char	*username = getenv("USER");
 
+	if (getcwd(cwd, PATH_MAX) == NULL)
+	{
+		perror("getcwd");
+		return -1;
+	}
+	write(STDOUT_FILENO, username, strlen(username));
+	write(STDOUT_FILENO, "@", 1);
+	// write(STDOUT_FILENO, hostname, strlen(hostname));
+	// write(STDOUT_FILENO, ":", 1);
+	write(STDOUT_FILENO, cwd, strlen(cwd));
+	write(STDOUT_FILENO, "$ ", 2);
+	*input = readline("$ ");
 	if (!*input)
 		return -1;
 	if (**input)
