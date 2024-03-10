@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/10 21:28:16 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/10 22:20:36 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	get_cmd(char **input)
 	}
 	write(STDOUT_FILENO, username, strlen(username));
 	write(STDOUT_FILENO, "@", 1);
-	// write(STDOUT_FILENO, hostname, strlen(hostname));
-	// write(STDOUT_FILENO, ":", 1);
+	write(STDOUT_FILENO, "system", strlen("system"));
+	write(STDOUT_FILENO, ":", 1);
 	write(STDOUT_FILENO, cwd, strlen(cwd));
 	write(STDOUT_FILENO, "$ ", 2);
-	*input = readline("$ ");
+	*input = readline(NULL);
 	if (!*input)
 		return -1;
 	if (**input)
