@@ -111,6 +111,8 @@ struct cmd	*list_cmd(struct cmd *left, struct cmd *right);
 struct cmd	*back_cmd(struct cmd *subcmd);
 
 /*** EXECUTOR ***/
+// run_cmd.c
+void	runcmd(t_cmd *cmd);
 
 /*** OTHER FUNCTIONS ***/
 // error_handling.c

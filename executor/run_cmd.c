@@ -6,14 +6,13 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 22:02:21 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/11 22:25:03 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/11 22:29:36 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../redlomshell.h"
 
-void
-runcmd(t_cmd *cmd)
+void	runcmd(t_cmd *cmd)
 {
 	int			p[2];
 	t_backcmd		*bcmd;
