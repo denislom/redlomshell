@@ -112,7 +112,7 @@ struct cmd	*back_cmd(struct cmd *subcmd);
 
 /*** EXECUTOR ***/
 // run_cmd.c
-void	runcmd(t_cmd *cmd);
+void	run_cmd(t_cmd *cmd);
 
 /*** OTHER FUNCTIONS ***/
 // error_handling.c

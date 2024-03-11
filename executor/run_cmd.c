@@ -6,13 +6,13 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 22:02:21 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/11 22:29:36 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/11 22:39:02 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../redlomshell.h"
 
-void	runcmd(t_cmd *cmd)
+void	run_cmd(t_cmd *cmd)
 {
 	int			p[2];
 	t_backcmd		*bcmd;
@@ -34,26 +34,26 @@ void	runcmd(t_cmd *cmd)
 	}
 	else if(cmd->type == REDIR)
 	{
-		rcmd = (struct redircmd*)cmd;
+		rcmd = (t_redircmd*)cmd;
 		close(rcmd->fd);
 		if(open(rcmd->file, rcmd->mode) < 0)
 		{
 			printf(2, "open %s failed\n", rcmd->file);
 			exit(NULL);
 		}
-		runcmd(rcmd->cmd);
+		run_cmd(rcmd->cmd);
 	}
 	else if(cmd->type == LIST)
 	{
-		lcmd = (struct listcmd*)cmd;
+		lcmd = (t_listcmd*)cmd;
 		if(fork1() == 0)
-			runcmd(lcmd->left);
+			run_cmd(lcmd->left);
 		wait(NULL);
-		runcmd(lcmd->right);
+		run_cmd(lcmd->right);
 	}
 	else if(cmd->type == PIPE)
 	{
-		pcmd = (struct pipecmd*)cmd;
+		pcmd = (t_pipecmd*)cmd;
 		if(pipe(p) < 0)
 			perror("pipe");
 		if(fork1() == 0)
@@ -62,7 +62,7 @@ void	runcmd(t_cmd *cmd)
 			dup(p[1]);
 			close(p[0]);
 			close(p[1]);
-			runcmd(pcmd->left);
+			run_cmd(pcmd->left);
 		}
 		if(fork1() == 0)
 		{
@@ -70,7 +70,7 @@ void	runcmd(t_cmd *cmd)
 			dup(p[0]);
 			close(p[0]);
 			close(p[1]);
-			runcmd(pcmd->right);
+			run_cmd(pcmd->right);
 		}
 		close(p[0]);
 		close(p[1]);
@@ -79,12 +79,12 @@ void	runcmd(t_cmd *cmd)
 	}
 	else if(cmd->type == BACK)
 	{
-		bcmd = (struct backcmd*)cmd;
+		bcmd = (t_backcmd*)cmd;
 		if(fork1() == 0)
-			runcmd(bcmd->cmd);
+			run_cmd(bcmd->cmd);
 	}
 	else
-		perror("runcmd");
+		perror("run_cmd");
 	exit(NULL);
 }
 
