@@ -99,16 +99,16 @@ typedef struct s_command
 /*** PARSER ***/
 
 //parsing.c
-struct cmd	*parse_cmd(char *s);
+t_cmd	*parse_cmd(char *s);
 int			get_token(char **ps, char *es, char **q, char **eq);
 int			peek(char **ps, char *es, char *toks);
 
 // construct.c
-struct cmd	*exec_cmd(void);
-struct cmd	*redir_cmd(struct cmd *subcmd, char *file, char *efile, int mode, int fd);
-struct cmd	*pipe_cmd(struct cmd *left, struct cmd *right);
-struct cmd	*list_cmd(struct cmd *left, struct cmd *right);
-struct cmd	*back_cmd(struct cmd *subcmd);
+t_cmd	*exec_cmd(void);
+t_cmd	*redir_cmd(t_cmd *subcmd, char *file, char *efile, int mode, int fd);
+t_cmd	*pipe_cmd(t_cmd *left, t_cmd *right);
+t_cmd	*list_cmd(t_cmd *left, t_cmd *right);
+t_cmd	*back_cmd(t_cmd *subcmd);
 
 /*** EXECUTOR ***/
 // run_cmd.c

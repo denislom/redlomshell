@@ -6,17 +6,17 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:42:53 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/09 22:52:04 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/11 22:42:32 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../redlomshell.h"
 
-struct cmd	*parse_cmd(char *s)
+t_cmd	*parse_cmd(char *s)
 {
 	char *es;
-	struct cmd	*cmd;
+	t_cmd	*cmd;
 
 	es = s + ft_strlen(s);
 	cmd = parse_line(&s, es);
