@@ -246,6 +246,8 @@ Theory:
 	https://github.com/mit-pdos/xv6-public/
 	https://pdos.csail.mit.edu/6.828/2019/labs/sh.html
 	https://github.com/mit-pdos/xv6-public
+	https://pdos.csail.mit.edu/6.828/2012/xv6.html
+	https://pdos.csail.mit.edu/6.828/2012/xv6/book-rev7.pdf
 [99] Programming a basic shell in C
 	https://www.youtube.com/watch?v=spD11nnLsLE
 	https://github.com/bitwitch/csapp/tree/master/ch8/shell
