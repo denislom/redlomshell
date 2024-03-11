@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/10 22:53:28 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/11 21:59:54 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,31 @@ int	get_cmd(char **input)
 	return (0);
 }
 
+int	fork1(void)
+{
+	int	pid;
+
+	pid = fork();
+	if(pid == -1)
+		perror("fork");
+	return pid;
+}
+
 int main(void)
 {
 	char	*input;
-
+	int fd;
 	input = NULL;
 	setup_signals();
-
+	// Ensure that three file descriptors are open.
+	while((fd = open("console", O_RDWR)) >= 0)
+	{
+		if(fd >= 3)
+		{
+			close(fd);
+			break;
+		}
+	}
 	while(get_cmd(&input) >= 0)
 	{
 		if (ft_strncmp(input, "cd ", 3) == 0)
@@ -69,11 +87,11 @@ int main(void)
 			}
 			continue;
 		}
-		// if (fork1() == 0) { // Assuming fork1 is your version of fork that handles errors
-		// 	run_cmd(parse_cmd(input));
-		// 	exit(0); // Ensure the child exits after running the command
-		// }
-		// wait(NULL); // Use wait with NULL to wait for any child process
+		if (fork1() == 0)
+		{
+			run_cmd(parse_cmd(input));
+		}
+		wait(NULL);
 	}
 
 	// Free the dynamically allocated inputfer at the end

@@ -22,6 +22,10 @@
 #include <readline/history.h>
 #include <signal.h>
 # include "./libft/libft.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 
 #define EXEC	1
 #define REDIR	2
