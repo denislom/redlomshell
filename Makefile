@@ -6,12 +6,15 @@
 #    By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 00:21:51 by dlom              #+#    #+#              #
-#    Updated: 2024/02/06 22:55:40 by dlom             ###   ########.fr        #
+#    Updated: 2024/03/12 21:10:24 by dlom             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	redlomshell
 SRCS =	redlomshell.c \
+		error_handling.c \
+		parser/construct.c \
+		parser/parsing.c \
 
 
 OBJS = $(SRCS:.c=.o)

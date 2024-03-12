@@ -6,10 +6,9 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:42:53 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/11 22:42:32 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/12 23:11:07 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../redlomshell.h"
 
@@ -28,6 +27,38 @@ t_cmd	*parse_cmd(char *s)
 	nul_terminate(cmd);
 	return cmd;
 }
+
+t_cmd	*parse_line(char **ps, char *es)
+{
+	t_cmd	*cmd;
+
+	cmd = parse_pipe(ps, es);
+	while(peek(ps, es, "&"))
+	{
+		get_token(ps, es, 0, 0);
+		cmd = back_cmd(cmd);
+	}
+	if(peek(ps, es, ";"))
+	{
+		get_token(ps, es, 0, 0);
+		cmd = list_cmd(cmd, parse_line(ps, es));
+	}
+	return cmd;
+}
+
+t_cmd	*parse_pipe(char **ps, char *es)
+{
+	t_cmd	*cmd;
+
+	cmd = parse_exec(ps, es);
+	if(peek(ps, es, "|"))
+	{
+		get_token(ps, es, 0, 0);
+		cmd = pipe_cmd(cmd, parse_pipe(ps, es));
+	}
+	return cmd;
+}
+
 
 int	get_token(char **ps, char *es, char **q, char **eq)
 {
@@ -93,4 +124,50 @@ int	peek(char **ps, char *es, char *toks)
 		s++;
 	*ps = s;
 	return (*s && ft_strchr(toks, *s));
+}
+
+t_cmd	*nul_terminate(t_cmd *cmd)
+{
+	int i = 0;
+	t_backcmd *bcmd;
+	t_execcmd *ecmd;
+	t_listcmd *lcmd;
+	t_pipecmd *pcmd;
+	t_redircmd *rcmd;
+
+	if(cmd == 0)
+		return 0;
+
+	if(cmd->type == EXEC)
+	{
+		ecmd = (t_execcmd*)cmd;
+		while(ecmd->argv[i])
+		{
+			*ecmd->eargv[i] = 0;
+			i++;
+		}
+	}
+	else if(cmd->type == REDIR){
+		rcmd = (t_redircmd*)cmd;
+		nul_terminate(rcmd->cmd);
+		*rcmd->efile = 0;
+	}
+	else if(cmd->type == PIPE)
+	{
+		pcmd = (t_pipecmd*)cmd;
+		nul_terminate(pcmd->left);
+		nul_terminate(pcmd->right);
+	}
+	else if(cmd->type == LIST)
+	{
+		lcmd = (t_listcmd*)cmd;
+		nul_terminate(lcmd->left);
+		nul_terminate(lcmd->right);
+	}
+	else if(cmd->type == BACK){
+		bcmd = (t_backcmd*)cmd;
+		nul_terminate(bcmd->cmd);
+	}
+
+	return cmd;
 }

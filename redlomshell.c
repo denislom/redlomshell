@@ -6,12 +6,11 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/11 21:59:54 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/11 22:57:15 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redlomshell.h"
-#include <linux/limits.h>
 
 void handle_sigint(int sig)
 {

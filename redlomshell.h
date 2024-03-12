@@ -25,6 +25,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <linux/limits.h>
 
 
 #define EXEC	1
@@ -48,7 +49,7 @@ typedef struct s_execcmd {
 
 typedef struct s_redircmd {
 	int type;
-	struct cmd *cmd;
+	t_cmd *cmd;
 	char *file;
 	char *efile;
 	int mode;
@@ -57,19 +58,19 @@ typedef struct s_redircmd {
 
 typedef struct s_pipecmd {
 	int type;
-	struct cmd *left;
-	struct cmd *right;
+	t_cmd *left;
+	t_cmd *right;
 } t_pipecmd;
 
 typedef struct s_listcmd {
 	int type;
-	struct cmd *left;
-	struct cmd *right;
+	t_cmd *left;
+	t_cmd *right;
 } t_listcmd;
 
 typedef struct s_backcmd {
 	int type;
-	struct cmd *cmd;
+	t_cmd *cmd;
 } t_backcmd;
 
 /* typedef enum e_return
@@ -99,9 +100,12 @@ typedef struct s_command
 /*** PARSER ***/
 
 //parsing.c
-t_cmd	*parse_cmd(char *s);
+t_cmd		*parse_cmd(char *s);
+t_cmd		*parse_line(char **ps, char *es);
+t_cmd		*parse_pipe(char **ps, char *es);
 int			get_token(char **ps, char *es, char **q, char **eq);
 int			peek(char **ps, char *es, char *toks);
+t_cmd		*nul_terminate(t_cmd *cmd);
 
 // construct.c
 t_cmd	*exec_cmd(void);
