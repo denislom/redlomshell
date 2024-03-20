@@ -106,6 +106,9 @@ t_cmd		*parse_pipe(char **ps, char *es);
 int			get_token(char **ps, char *es, char **q, char **eq);
 int			peek(char **ps, char *es, char *toks);
 t_cmd		*nul_terminate(t_cmd *cmd);
+t_cmd		*parse_exec(char **ps, char *es);
+t_cmd		*parse_block(char **ps, char *es);
+t_cmd	*parse_redirs(t_cmd *cmd, char **ps, char *es);
 
 // construct.c
 t_cmd	*exec_cmd(void);

@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:42:53 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/12 23:11:07 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/20 20:45:00 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,5 +169,78 @@ t_cmd	*nul_terminate(t_cmd *cmd)
 		nul_terminate(bcmd->cmd);
 	}
 
+	return cmd;
+}
+
+t_cmd	*parse_exec(char **ps, char *es)
+{
+	char			*q;
+	char			*eq;
+	int				tok;
+	int				argc;
+	t_execcmd		*cmd;
+	t_cmd			*ret;
+
+	if(peek(ps, es, "("))
+		return (parse_block(ps, es));
+
+	ret = exec_cmd();
+	cmd = (t_execcmd*)ret;
+
+	argc = 0;
+	ret = parse_redirs(ret, ps, es);
+	while(!peek(ps, es, "|)&;"))
+	{
+		if((tok=get_token(ps, es, &q, &eq)) == 0)
+			break;
+		if(tok != 'a')
+			perror("syntax");
+		cmd->argv[argc] = q;
+		cmd->eargv[argc] = eq;
+		argc++;
+		if(argc >= MAXARGS)
+			perror("too many args");
+		ret = parse_redirs(ret, ps, es);
+	}
+	cmd->argv[argc] = 0;
+	cmd->eargv[argc] = 0;
+	return (ret);
+}
+
+t_cmd	*parse_block(char **ps, char *es)
+{
+	t_cmd	*cmd;
+
+	if(!peek(ps, es, "("))
+		perror("parse_block");
+	get_token(ps, es, 0, 0);
+	cmd = parse_line(ps, es);
+	if(!peek(ps, es, ")"))
+		perror("syntax - missing )");
+	get_token(ps, es, 0, 0);
+	cmd = parse_redirs(cmd, ps, es);
+	return (cmd);
+}
+
+t_cmd	*parse_redirs(t_cmd *cmd, char **ps, char *es)
+{
+	int		tok;
+	char	*q;
+	char	*eq;
+
+	while(peek(ps, es, "<>"))
+	{
+		tok = get_token(ps, es, 0, 0);
+		if(get_token(ps, es, &q, &eq) != 'a')
+			perror("missing file for redirection");
+		
+		if(tok == '<')
+			cmd = redir_cmd(cmd, q, eq, O_RDONLY, 0);
+		else if(tok == '>')
+			cmd = redir_cmd(cmd, q, eq, O_WRONLY | O_CREAT, 1);
+		else if(tok == '+') { // For '>>', assuming '+' represents it in your original code. Adjust as necessary.
+			cmd = redir_cmd(cmd, q, eq, O_WRONLY | O_CREAT, 1); // Added O_APPEND for the append operation
+		}
+	}
 	return cmd;
 }
