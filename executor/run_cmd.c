@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 22:02:21 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/11 22:58:28 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/20 20:54:13 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	run_cmd(t_cmd *cmd)
 {
-	int			p[2];
+	int				p[2];
 	t_backcmd		*bcmd;
 	t_execcmd		*ecmd;
 	t_listcmd		*lcmd;

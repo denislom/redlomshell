@@ -6,7 +6,7 @@
 #    By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 00:21:51 by dlom              #+#    #+#              #
-#    Updated: 2024/03/20 20:46:24 by dlom             ###   ########.fr        #
+#    Updated: 2024/03/20 21:05:06 by dlom             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS =	redlomshell.c \
 		error_handling.c \
 		parser/construct.c \
 		parser/parsing.c \
-		executor/rund_cmd.c\
+		# executor/run_cmd.c\
 
 
 OBJS = $(SRCS:.c=.o)

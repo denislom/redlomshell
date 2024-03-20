@@ -6,7 +6,7 @@
 /*   By: dlom <dlom@student.42prague.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:51:07 by dlom              #+#    #+#             */
-/*   Updated: 2024/03/11 22:57:15 by dlom             ###   ########.fr       */
+/*   Updated: 2024/03/20 21:35:54 by dlom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ int	fork1(void)
 int main(void)
 {
 	char	*input;
-	int fd;
+	int		fd;
+	t_cmd	*parsed;
+
 	input = NULL;
+	parsed = NULL;
 	setup_signals();
 	// Ensure that three file descriptors are open.
 	while((fd = open("console", O_RDWR)) >= 0)
@@ -88,11 +91,14 @@ int main(void)
 		}
 		if (fork1() == 0)
 		{
-			run_cmd(parse_cmd(input));
+			parsed = parse_cmd(input);
+			printf("from fork1: %d\n", parsed->type);
+			// run_cmd(parsed);
+			// run_cmd(parse_cmd(input));
 		}
 		wait(NULL);
 	}
-
+	printf("from main: %d\n", parsed->type);
 	// Free the dynamically allocated inputfer at the end
 	free(input);
 	return 0;
